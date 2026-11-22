@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff"><title>Hearth — House Price Estimate</title>
+  <link rel="stylesheet" href="/static/styles.css?v=2">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar"><a class="brand" href="/static/index.html"><span class="brand-mark">H</span> hearth<span class="brand-dot">.</span></a><span class="top-note">PROPERTY DATA <i></i> HOME VALUE ESTIMATOR</span></header>
+    <section class="intro"><div class="eyebrow"><span class="live-dot"></span> YOUR CITY, YOUR NEXT CHAPTER</div><h1>Find your place<br>in the <em>city.</em></h1><p>A simple starting point for understanding a home's value. Estimates use the uploaded housing dataset and are converted to US dollars.</p></section>
+    <div id="modelNotice" class="notice" hidden><span>ⓘ</span><div><strong>Model status</strong><br></div></div>
+    <section class="workspace">
+      <form id="homeForm" class="form-card">
+        <div class="card-heading"><div><span class="step">01 / HOME DETAILS</span><h2>Describe the property</h2></div><span class="home-icon">⌂</span></div>
+        <div class="fields">
+          <label>Area <span class="unit">SQ FT</span><input name="area" type="number" min="1" max="100000" value="5000" required></label>
+          <label>Bedrooms<input name="bedrooms" type="number" min="0" max="30" step="1" value="3" required></label>
+          <label>Bathrooms<input name="bathrooms" type="number" min="0" max="30" step="1" value="1" required></label>
+          <label>Stories<input name="stories" type="number" min="0" max="30" step="1" value="2" required></label>
+          <label>Parking spaces<input name="parking" type="number" min="0" max="30" step="1" value="1" required></label>
+          <label>Main road access<select name="mainroad" required></select></label>
+          <label>Guest room<select name="guestroom" required></select></label>
+          <label>Basement<select name="basement" required></select></label>
+          <label>Hot water heating<select name="hotwaterheating" required></select></label>
+          <label>Air conditioning<select name="airconditioning" required></select></label>
+          <label>Preferred area<select name="prefarea" required></select></label>
+          <label class="wide">Furnishing status<select name="furnishingstatus" required></select></label>
+        </div>
+        <button type="submit" id="submitBtn"><span>Estimate home value</span><span class="arrow">↗</span></button>
+        <div id="formResult" class="form-result" aria-live="polite" hidden><span class="step">ESTIMATED PRICE · USD</span><strong id="formPrice">—</strong><span id="formBand"></span><small>Converted from the dataset’s BDT price.</small></div>
+        <p id="formError" class="form-error" role="alert" hidden></p>
+        <p class="fine-print">Your estimate is indicative and depends on the data available.</p>
+      </form>
+      <section class="result-card" aria-live="polite">
+        <div id="emptyState" class="empty-state"><div class="sun">✳</div><span class="step">YOUR ESTIMATE</span><h2>A thoughtful estimate<br>starts here.</h2><p>Enter a few details about the home to see its estimated value and predicted price band.</p><div class="mini-rule"></div><small>FASTAPI · GRADIENT BOOSTING</small></div>
+        <div id="resultState" hidden><div class="result-top"><span class="step">YOUR ESTIMATE · USD</span><span class="result-check">✓</span></div><p class="result-caption">Estimated home value</p><div id="price" class="price">—</div><div class="band-row"><span id="band" class="band">—</span><span id="confidence" class="confidence"></span></div><div class="divider"></div><h3>Price band probabilities</h3><div id="probabilities" class="probabilities"></div><div class="estimate-note">Indicative estimate. Converted from BDT at ৳123.8377 per USD (Bangladesh Bank reference, Oct 26, 2026).</div></div>
+      </section>
+    </section>
+    <section class="model-strip"><div><span class="step">MODEL SNAPSHOT</span><h2>Built with a little rigor.</h2><p>Missing values are imputed, numeric features scaled, and property categories encoded before fitting Gradient Boosting.</p></div><div class="metric"><span>ACCURACY</span><strong id="accuracy">—</strong></div><div class="metric"><span>MACRO F1</span><strong id="f1">—</strong></div><div class="metric"><span>TEST ROWS</span><strong id="testRows">—</strong></div></section>
+    <footer><span>HEARTH <span class="brand-dot">·</span> HOUSE PRICE ESTIMATOR</span><span>For guidance, not a formal appraisal.</span></footer>
+  </main><script src="/static/app.js?v=3"></script>
+</body></html>
